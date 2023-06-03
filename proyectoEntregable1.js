@@ -42,19 +42,17 @@ class ProductManager {
   if(isFull &&isNew){
     this.products.push(newProduct)
   }
+  else{
+    console.log("El Producto no ha podido agregarse")
+  }
    };
 }
 const Products1 = new ProductManager();
+console.log(Products1.getProducts());
+Products1.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
+console.log( Products1.getProducts());
+Products1.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25);
 
-Products1.addProduct("manzanas", "frutaroja", 30, "naurl", 1111, 2);
-Products1.addProduct("peras", "frutaverde", 50, "naurl", 2222, 28);
-Products1.addProduct("bananas", "frutaroja", 30, "naurl", 1119); //CAMPO UNDEFINED
-Products1.addProduct("duraznos", "frutaroja", 30, "naurl", 2222, 2); //no tiene que entrar codigo repetido
-Products1.addProduct("naranjas", "frutaroja", 30, "naurl", 113, 4);
-Products1.addProduct("uvas", "frutaroja", 30,null,  441, 2); //CAMPO UNDEFINED
-Products1.addProduct("ciruelas", "frutaroja", 30, "naurl",null, 2); //CAMPO UNDEFINED
-Products1.addProduct("sandias", "frutaroja", 30, "naurl", 1118, 2); 
 
- console.log("estos son los prod finales", Products1.getProducts());
  console.log("este es el prod por id: ",Products1.getProductById(3));
 
