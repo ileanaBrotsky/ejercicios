@@ -22,12 +22,12 @@ class ProductManager {
   addProduct = (title, description, price, thumbnail, code, stock) => {
     const newProduct = {
       id: this.getNextID(),
-      title: title,
-      description: description,
-      price: price,
-      thumbnail: thumbnail,
-      code: code,
-      stock: stock,
+      title,
+      description,
+      price,
+      thumbnail,
+      code,
+      stock,
     };
     let isFull = true;
     let isNew = true;
