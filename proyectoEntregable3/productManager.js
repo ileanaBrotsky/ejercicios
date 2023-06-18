@@ -1,9 +1,8 @@
-const fs = require("fs");
-
-class ProductManager {
+import fs from "fs";
+export default class ProductManager {
   constructor(file) {
     this.file = file;
-    this.path = "./files-fs-docs";
+    this.path = "./files-docs";
   }
   getNextID = async () => {
     const products = await this.getProducts();
@@ -69,30 +68,36 @@ class ProductManager {
     }
   };
   getProductById = async (idProd) => {
-    const products = await this.getProducts();
-    let prod = products.find((element) => element.id === idProd);
-    return prod ? prod : "No se encontro el producto por ese id";
+    try {
+      const products = await this.getProducts();
+      let prod = products.find((element) => element.id === idProd);
+      return prod ? prod : `No se encontro el producto por el id ${idProd}`;
+    } catch (error) {
+      console.log("hubo un error: ", error);
+    }
   };
   updateProduct = async (idProd, entry, value) => {
-   if(entry!="id"){
+    if (entry != "id") {
       const products = await this.getProducts();
-      const product = products.find((prod) => parseInt(prod.id)=== idProd);
+      const product = products.find((prod) => parseInt(prod.id) === idProd);
       if (product) {
-      products.forEach((prod) => {
-        if (prod.id === idProd) {
-          prod[entry] = value;
-        }
-      });
-      const productsInfile = JSON.stringify(products, "\t");
-      await fs.promises.writeFile(this.path + "/" + this.file, productsInfile);
-      console.log("se modificaron los datos,");
+        products.forEach((prod) => {
+          if (prod.id === idProd) {
+            prod[entry] = value;
+          }
+        });
+        const productsInfile = JSON.stringify(products, "\t");
+        await fs.promises.writeFile(
+          this.path + "/" + this.file,
+          productsInfile
+        );
+        console.log("se modificaron los datos,");
+      } else {
+        console.log("No se encontró el producto a modificar");
+      }
     } else {
-      console.log("No se encontró el producto a modificar");
+      console.log("EL campo que intenta actualizar es un campo protegido");
     }
-  }
-  else{
-    console.log("EL campo que intenta actualizar es un campo protegido")
-  }
   };
   deleteProduct = async (idProd) => {
     const products = await this.getProducts();
@@ -106,41 +111,3 @@ class ProductManager {
     }
   };
 }
-async function run() {
-  console.log(
-    "-----------------------------------------------------------------------------------"
-  );
-  const Products1 = new ProductManager("products.json");
-  console.log(await Products1.getProducts());
-  await Products1.addProduct(
-    "producto prueba",
-    "Este es un producto prueba ",
-    200,
-    "Sin imagen",
-    "abc123",
-    25
-  );
-  console.log(await Products1.getProducts());
-  await Products1.addProduct(
-    "producto prueba 2",
-    "Este es un segundo producto 2",
-    200,
-    "Sin imagen",
-    "455df",
-    25
-  );
-  await Products1.addProduct(
-    "producto prueba 3",
-    "Este es un tercer producto 3",
-    300,
-    "Sin imagen",
-    "eec123",
-    25
-  );
-  console.log(await Products1.getProductById(8));
-   await Products1.updateProduct(2, "code", "452a");
-//   await Products1.deleteProduct(2);
-//   await Products1.deleteProduct(2);
-}
-
-run();
