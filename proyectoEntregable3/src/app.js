@@ -22,12 +22,7 @@ app.get("/products/", async (req, resp) => {
 
 app.get("/products/:pid", async (req, resp) => {
   try {
-    //      let id=parseInt(req.params.pid)
-    //     const prod = await Products1.getProductById(id);
-    //    console.log("el prod es", prod)
-    resp
-      .status(200)
-      .send(await Products1.getProductById(parseInt(req.params.pid)));
+    resp.status(200).send(await Products1.getProductById(parseInt(req.params.pid)));
   } catch (error) {
     console.log("hubo un error: ", error);
   }
