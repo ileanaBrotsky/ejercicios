@@ -11,16 +11,12 @@ app.get("/products/", async (req, resp) => {
     const products = await Products1.getProducts();
     let limit = parseInt(req.query.limit);
     if (limit && limit <= products.length) {
-      const NewProducts = [];
-      for (let i = 0; i < limit; i++) {
-        NewProducts.push(products[i]);
-      }
-      resp.status(200).send(NewProducts);
-    } else {
-      resp.status(200).send(products);
+      products.length=limit
     }
+      resp.status(200).send(products);
+   
   } catch (error) {
-    //   console.log("hubo un error: ", error);
+     console.log("hubo un error: ", error);
   }
 });
 
