@@ -1,0 +1,150 @@
+[
+  {
+    "id": 1,
+    "title": "producto prueba",
+    "description": "Este es un producto prueba ",
+    "price": 200,
+    "thumbnail": [],
+    "code": "abc123",
+    "stock": 25,
+    "status": true,
+    " category": "libreria"
+  },
+  {
+    "id": 2,
+    "title": "producto prueba 2",
+    "description": "Este es un segundo producto 2",
+    "price": 200,
+    "thumbnail": [],
+    "code": "452a",
+    "stock": 25,
+    "category": "libreria",
+    "status": true
+  },
+  {
+    "id": 3,
+    "title": "producto prueba 3",
+    "description": "este es un cambio en el producto 3",
+    "price": 300,
+    "thumbnail": [],
+    "code": "eec123",
+    "stock": 25,
+    "category": "libreria",
+    "status": true
+  },
+  {
+    "id": 4,
+    "title": "producto prueba 4",
+    "description": "Este es un segundo producto 4",
+    "price": 200,
+    "thumbnail": [],
+    "code": "455df",
+    "stock": 25,
+    "category": "libreria",
+    "status": true
+  },
+  {
+    "id": 5,
+    "title": "producto prueba 5",
+    "description": "Este es un producto prueba 5",
+    "price": 200,
+    "thumbnail": [],
+    "code": "ab5123",
+    "stock": 25,
+    "category": "libreria",
+    "status": true
+  },
+  {
+    "id": 6,
+    "title": "producto prueba 6",
+    "description": "Este es un segundo producto 6",
+    "price": 600,
+    "thumbnail": [],
+    "code": "456a",
+    "stock": 25,
+    "category": "libreria",
+    "status": true
+  },
+  {
+    "id": 7,
+    "title": "producto prueba 7",
+    "description": "Este es un tercer producto 7",
+    "price": 700,
+    "thumbnail": [],
+    "code": "eec127",
+    "stock": 25,
+    "category": "libreria",
+    "status": true
+  },
+  {
+    "id": 8,
+    "title": "producto prueba 8",
+    "description": "Este es un segundo producto 8",
+    "price": 200,
+    "thumbnail": [],
+    "code": "855df",
+    "stock": 25,
+    "category": "libreria",
+    "status": true
+  },
+  {
+    "id": 9,
+    "title": "producto prueba 9",
+    "description": "Este es un producto prueba 9",
+    "price": 200,
+    "thumbnail": [],
+    "code": "abc9123",
+    "stock": 25,
+    "category": "libreria",
+    "status": true
+  },
+  {
+    "id": 10,
+    "title": "producto prueba 10",
+    "description": "Este es un segundo producto 10",
+    "price": 200,
+    "thumbnail": [],
+    "code": "4510a",
+    "stock": 25,
+    "category": "libreria",
+    "status": true
+  },
+  {
+    "id": 11,
+    "title": "lapiz",
+    "description": "lapiz negr 03",
+    "price": 300,
+    "thumbnail": [
+      "E:\\trabajo_programacion\\guias y tutoriales\\Programacion backend coderhouse\\ejercicios\\proyectoFinal_entrega1\\src\\public\\img\\1687726791797-IMG_0501.JPG"
+    ],
+    "code": "7887rr",
+    "stock": "110",
+    "category": "escolar libreria",
+    "status": true
+  },
+  {
+    "id": 12,
+    "title": "cuaderno",
+    "description": "rayado 48hojas",
+    "price": 123,
+    "thumbnail": [
+      "E:\\trabajo_programacion\\guias y tutoriales\\Programacion backend coderhouse\\ejercicios\\proyectoFinal_entrega1\\src\\public\\img\\1687727292269-100_0244.JPG"
+    ],
+    "code": "0001A",
+    "category": "escolar",
+    "status": true
+  },
+  {
+    "id": 13,
+    "title": "cartuchera",
+    "description": "infantil",
+    "price": 455,
+    "thumbnail": [
+      "E:\\trabajo_programacion\\guias y tutoriales\\Programacion backend coderhouse\\ejercicios\\proyectoFinal_entrega1\\src\\public\\img\\1687729645024-193425_1923109199068_1686854_o.jpg"
+    ],
+    "code": "111c",
+    "stock": 10,
+    "category": "escolar",
+    "status": true
+  }
+]
