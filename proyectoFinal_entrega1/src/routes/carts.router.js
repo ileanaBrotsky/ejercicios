@@ -45,23 +45,4 @@ router.get("/", async (req, resp) => {
   }
 });
 
-
-
-
-// router.put("/:pid", async (req, resp) => {
-//   try {
-//     let entry= req.body.entry
-//     let value= req.body.value
-//     resp.status(200).send(await Carts1.updateProduct(parseInt(req.params.pid), entry, value));
-//   } catch (error) {
-//     console.log("hubo un error: ", error);
-//   }
-// });
-// router.delete("/:pid", async (req, resp) => {
-//   try {
-//     resp.status(200).send(await Carts1.deleteProduct(parseInt(req.params.pid)));
-//   } catch (error) {
-//     console.log("hubo un error: ", error);
-//   }
-// });
 export default router
