@@ -1,9 +1,32 @@
-<div>
-    <h1> Los productos son </h1>
-    <ul>
-        {{#each products}}
-        <li>{{this.title}}, {{this.price}}, </li>
-        {{/each}}
-    </ul>
+<div class="container d-flex flex-column justify-content-center">
+   <div class="row my-5 text-center">
+         <div class="table-responsive">
+             <h1>Lista de Productos</h1>
+          <table class="table table-striped" >
+           
+            <thead>
+               <tr>
+                  <th scope="col">Codigo</th>
+                  <th scope="col">Producto</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Stock</th>
+               </tr>
+            </thead>
+            <tbody id="tableProductsBody">
+               {{#each products}}
+               <tr>
+                  <th scope="row">{{this.code}}</th>
+                  <td>{{this.title}}</td>
+                  <td>{{this.description}}</td>
+                  <td>{{this.price}}</td>
+                  <td>{{this.category}}</td>
+                  <td>{{this.stock}}</td>
+               </tr>
+                  {{/each}}
+          </table>
+         </div>
+   </div>
 </div>
 <script src="/js/index.js"></script>
