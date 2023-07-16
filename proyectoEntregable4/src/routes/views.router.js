@@ -31,7 +31,7 @@ router.get('/realtimeproducts',async (req, res)=>{
         if (limit && limit <= products.length) {
           products.length=limit
         }
-          res.status(200).render('realTimeProducts',{products:products, style:'bootstrap.css'});
+          res.status(200).render('realTimeProducts',{products:products, style:'index.css'});
        
       } catch (error) {
          console.log("hubo un error: ", error);
