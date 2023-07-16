@@ -1,0 +1,22 @@
+h1, h2{
+    color:red;
+}
+li{
+    color:rgb(76, 0, 255); 
+}
+input{
+    margin-bottom:1rem ;
+}
+div{
+    margin:2rem;
+    padding:2rem;
+}
+.container{
+    width: 90vh;
+    display: flex;
+    justify-content: center;
+}
+.marco{
+    border: solid red 3px;
+    width:50%
+}
