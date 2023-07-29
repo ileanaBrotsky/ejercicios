@@ -1,8 +1,11 @@
-<div class="container d-flex flex-column justify-content-center">
-   <div class="row my-5 text-center">
-         <div class="table-responsive">
-             <caption>Lista de Productos</caption>
-          <table class="table table-striped" >
+
+<div class="container-full d-flex flex-column justify-content-center">
+<h1>Administrar Productos</h1>
+
+<button type="button" class="btn btn-primary btn-sm mb-1 " data-bs-toggle="modal" data-bs-target="#addProductModal">Agregar producto</button>
+
+
+          <table class="table-responsive table table-striped table-bordered" >
            
             <thead>
                <tr>
@@ -12,6 +15,7 @@
                   <th scope="col">Precio</th>
                   <th scope="col">Categoria</th>
                   <th scope="col">Stock</th>
+                  <th scope="col">Acciones</th>
                </tr>
             </thead>
             <tbody id="tableProductsBody">
@@ -23,22 +27,25 @@
                   <td>{{this.price}}</td>
                   <td>{{this.category}}</td>
                   <td>{{this.stock}}</td>
+                  <td>  <button type="button" class="btn btn-warning w-100 mb-1" >Modificar</button>
+                        <button type="button" class="btn btn-danger w-100 mb-1">Eliminar</button>
+                   </td>
                </tr>
                   {{/each}}
           </table>
-         </div>
    </div>
-      <div class="row my-5 text-center">
-         <h2>Manejo de productos</h2>
+   <!-- Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered bg-danger"  style="width: 200rem;">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="addProductModalLabel">Agregar Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="row mb-3 d-flex justify-content-center">
-      <div class="card text-bg-light" style="width: 50rem;">
-         <div class="card-header">
-          <h3> Agregue un producto</h3>
-         </div>
-         <div class="card-body">
+      <div class="modal-body">
+         <div class="container-fluid">
       <form id="AddProductForm" enctype="multipart/form-data">
-      <div class="row">
+      <div class="row p-0 bg-danger">
          <div class="col mb-3">
             <label for="title" class="form-label">Producto</label>
             <input type="text" name="title"  class="form-control" id="title" placeholder="ingrese el nombre del producto.">
@@ -65,7 +72,8 @@
             <label for="price" class="form-label">Precio</label>
             <input type="number" name="price"  class="form-control" id="price" placeholder="ingrese el precio del producto">
          </div>
-      </div>     
+      </div>  
+
       {{!-- <div class="row">
          <div class="col mb-3"> 
             <div class="input-group">
@@ -80,9 +88,24 @@
       </div>
    </div>
    </form>
+   </div>
 </div>
 </div>
-</div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="row text-center">
+         <h2>Manejo de productos</h2>
+      </div>
+      <div class="row mb-3 d-flex justify-content-center">
+      
+
  <div class="row d-flex justify-content-center">
 <div class="card text-bg-light" style="width: 50rem;">
    <div class="card-header">

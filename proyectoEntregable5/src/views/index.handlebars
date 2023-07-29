@@ -1,0 +1,33 @@
+<div>
+    <h1>Estos son los productos</h1>
+
+          <table class="table-responsive table table-striped table-bordered" >
+           
+            <thead>
+               <tr>
+                  <th scope="col">Codigo</th>
+                  <th scope="col">Producto</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Acciones</th>
+               </tr>
+            </thead>
+            <tbody id="tableProductsBody">
+               {{#each products}}
+               <tr>
+                  <th scope="row">{{this.code}}</th>
+                  <td>{{this.title}}</td>
+                  <td>{{this.description}}</td>
+                  <td>{{this.price}}</td>
+                  <td>{{this.category}}</td>
+                  <td>{{this.stock}}</td>
+                  <td>  <button type="button" class="btn btn-warning w-100 mb-1" >Modificar</button>
+                        <button type="button" class="btn btn-danger w-100 mb-1">Eliminar</button>
+                   </td>
+               </tr>
+                  {{/each}}
+          </table>
+</div>
+{{!-- <script src="/js/index.js"></script> --}}
