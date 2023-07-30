@@ -2,10 +2,11 @@
 //for the chat
 //=========================================
 const socket = io();
-let user;
+let user = sessionStorage.getItem('user') || '';
 let chatBox = document.getElementById("chatBox");
 
-Swal.fire({
+if (!user) {
+  Swal.fire({
   // icon: 'error',
   title: "Quién sos?",
   input: "text",
@@ -17,8 +18,13 @@ Swal.fire({
 }).then((result) => {
   user = result.value;
   document.getElementById("userName").innerHTML = user;
+  sessionStorage.setItem("user", user)
+  socket.emit('new', user)
 });
-
+}else{
+  document.getElementById("userName").innerHTML = user;
+  socket.emit('new', user)
+}
 chatBox.addEventListener("keyup", (evt) => {
    
   if (evt.key ==="Enter") {
