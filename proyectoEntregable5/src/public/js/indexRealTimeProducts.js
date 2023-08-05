@@ -1,7 +1,10 @@
-const socket =io();
+
+//for the chat
+//=========================================
+const socket = io();
 //envio con emit el nombre de la funcion y los datos
-socket.emit("message", "Comunicacion con websocket funcionando!!!")
-socket.emit("chargeList")
+
+// agregar producto con socket
 const form= document.getElementById('AddProductForm').onsubmit = e => {
     e.preventDefault()
 
@@ -17,7 +20,6 @@ const form= document.getElementById('AddProductForm').onsubmit = e => {
     form.reset();
 }
 
-
 socket.on("uploadList",productsList=>{
     console.log("lista uploaded", productsList);
 
@@ -27,12 +29,27 @@ socket.on("uploadList",productsList=>{
     html+= `<tr>
                 <th scope="row">${product.code}</th>
                 <td>${product.title}</td>
-                <td>${product.description}}</td>
+                <td>${product.description}</td>
                 <td>${product.price}</td>
-                <td>${product.categry}</td>
+                <td>${product.category}</td>
                 <td>${product.stock}</td>
+                <td>  <button type="button" class="btn btn-warning w-100 mb-1"  data-bs-toggle="modal" data-bs-target="#UploadProductModal" id="btn-upload">Modificar</button>
+                <button type="button" class="btn btn-danger w-100 mb-1" id="btn-delete">Eliminar</button>
+                </td>
             </tr>`
-        })              
-    
+        })
+
     tableBody.innerHTML=html
-}) 
+});
+// modificar producto desde socket
+let btnUpload = document.getElementById("btn-upload");
+
+btnUpload.addEventListener("click", (evt) => {
+  console.log("entro en la funcion modificar", evt)
+})
+//eliminar producto desde socket
+let btnDelete = document.getElementById("btn-delete");
+
+btnDelete.addEventListener("click", (evt) => {
+  console.log("entro en la funcion eliminar", evt)
+})

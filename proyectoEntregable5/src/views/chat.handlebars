@@ -1,33 +1,29 @@
-<div>
-  <h1>este es el sector de chat</h1>
-  <div class="row">
-  <div class="col-6 border border-primary-subtle border-3 rounded">
+ <div class="p-4">
+  <h1>Este es el sector de chat</h1>
+  </div>
+   <div class="row" style="height: 700px;">
+    <div class="col border border-2 p-4 m-3">
+       <h3 > Bienvenid@ <span id="userName"></span>!</h3>
     <div class="mb-1">
-      {{!-- <label for="namebox" class="form-label">Tu nombre</label>
-      <input type="text" class="form-control" id="namebox" placeholder="tu nombre para el chat"/> --}}
-    <h3 > Bienvenid@ <span id="userName"></span>     </h3>
-    </div>
-    
-    <div class="mb-1">
-      <label
-        for="chatBox"
-        class="form-label"
-      >Mensaje</label>
+
       <textarea
-        class="form-control"
+        class="form-control h-50"
         id="chatBox"
         rows="5"
-        placeholder="Leave a comment here"
+        placeholder="Deja tu comentario aqui"
       ></textarea>
     </div>
-   
+    </div>
+    <div class="col border border-2 p-4 m-3">
+     <h3>Chat:</h3> 
+      <p id="messagesLogs"></p>
+    </div>
+    
   </div>
-  <div class="col">
-    <p id="messageLogs"></p>
-  </div>
-  </div>
-</div>
+ 
+  
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script src="/js/index.js"></script>
+<script src="/js/indexChat.js"></script>

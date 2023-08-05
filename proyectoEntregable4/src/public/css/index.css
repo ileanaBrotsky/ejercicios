@@ -1,3 +1,7 @@
+body{
+    width: 80%;
+    background-color: aquamarine;
+}   
 h1, h2{
     color:red;
 }

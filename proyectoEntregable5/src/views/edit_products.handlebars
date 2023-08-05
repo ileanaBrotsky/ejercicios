@@ -1,0 +1,35 @@
+  <div class="d-flex justify-content-between align-items-center p-4">
+
+         <h1>Mdificar y agregar productos</h1>
+         <a type="button" class="btn btn-secondary " href="/create"><span class="h4">+</span> Agregar nuevo</a>
+   </div>
+    <div class="row d-flex justify-content-center p-4">
+          <table class="table-responsive table table-striped table-bordered" >
+           
+            <thead>
+               <tr>
+                  <th scope="col">Codigo</th>
+                  <th scope="col">Producto</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Acciones</th>
+               </tr>
+            </thead>
+            <tbody id="tableProductsBody">
+               {{#each products}}
+               <tr>
+                  <th scope="row">{{this.code}}</th>
+                  <td>{{this.title}}</td>
+                  <td>{{this.description}}</td>
+                  <td>{{this.price}}</td>
+                  <td>{{this.category}}</td>
+                  <td>{{this.stock}}</td>
+                  <td>  <a type="button" class="btn btn-warning w-100 mb-1" href="/update/{{this.code}}">Modificar<a>
+                        <a type="button" class="btn btn-danger w-100 mb-1" href="/delete/{{this.code}}">Eliminar</a>
+                   </td>
+               </tr>
+                  {{/each}}
+          </table>
+</div>

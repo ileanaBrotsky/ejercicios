@@ -1,40 +1,7 @@
 <div>
    <div class=" row flex justify-content-between ">
       <div class="col  "> 
-         <h1>Estos son los productos</h1>
+         <h1>Bienvenid@ {{user.name}}</h1>
          </div>
-      <div class="col ">
-         <a type="button" class="btn btn-success mb-1" href="/create">Agregar nuevo</a>
-         </div>
-   </div>
-   
-
-          <table class="table-responsive table table-striped table-bordered" >
-           
-            <thead>
-               <tr>
-                  <th scope="col">Codigo</th>
-                  <th scope="col">Producto</th>
-                  <th scope="col">Descripcion</th>
-                  <th scope="col">Precio</th>
-                  <th scope="col">Categoria</th>
-                  <th scope="col">Stock</th>
-                  <th scope="col">Acciones</th>
-               </tr>
-            </thead>
-            <tbody id="tableProductsBody">
-               {{#each products}}
-               <tr>
-                  <th scope="row">{{this.code}}</th>
-                  <td>{{this.title}}</td>
-                  <td>{{this.description}}</td>
-                  <td>{{this.price}}</td>
-                  <td>{{this.category}}</td>
-                  <td>{{this.stock}}</td>
-                  <td>  <a type="button" class="btn btn-warning w-100 mb-1" href="/update/{{this.code}}">Modificar<a>
-                        <a type="button" class="btn btn-danger w-100 mb-1" href="/delete/{{this.code}}">Eliminar</a>
-                   </td>
-               </tr>
-                  {{/each}}
-          </table>
+     
 </div>
