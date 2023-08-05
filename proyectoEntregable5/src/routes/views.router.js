@@ -9,6 +9,12 @@ router.get("/", async (req, res) => {
   let  user={ name:'Hilda'}
     res.render('index',{user:user, style:'index.css'})
 });
+//CARRITO
+router.get("/cart", async (req, res) => {
+ 
+    res.render('cart',{style:'index.css'})
+});
+//copiado de la afterclass
 
 //  PRODUCTS - Ver todos los productos
 router.get("/products", async (req, res) => {
