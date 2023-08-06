@@ -37,7 +37,7 @@ mongoose.connect(url,{dbName:"ecommerce"})
                   console.log(`${user} se acaba de conectar`);
                   try {
                       messages = await MessageModel.find().lean().exec();
-                      console.log("los mensajes de la base son",messages)
+                     // console.log("los mensajes de la base son",messages)
                       io.emit('messagesLogs', messages)
                     } catch (error) {
                       console.log("cannot get chats with mongoose", error);

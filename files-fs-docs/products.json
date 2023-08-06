@@ -1,1 +1,136 @@
-[{"id":1,"title":"producto prueba","description":"Este es un producto prueba ","price":200,"thumbnail":"Sin imagen","code":"abc123","stock":25},{"id":2,"title":"producto prueba 2","description":"Este es un segundo producto 2","price":200,"thumbnail":"Sin imagen","code":"452a","stock":25},{"id":3,"title":"producto prueba 3","description":"Este es un tercer producto 3","price":300,"thumbnail":"Sin imagen","code":"eec123","stock":25},{"id":4,"title":"producto prueba 2","description":"Este es un segundo producto 2","price":200,"thumbnail":"Sin imagen","code":"455df","stock":25}]
+[    {
+        "title": "Cama Peluche Deluxe",
+        "description": "Cama cómoda y suave para el descanso de tu mascota.",
+        "category": "Camas y muebles para mascotas",
+        "price": 1200,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAOafI6jNJgrOTsS9M4anNzNRG8NZpN-PokUU48-begk1wYkGz4ts_6fB9m1-K4xEGriY&usqp=CAU"] ,
+        "code": "MPD-1234",
+        "stock": 25
+    },
+    {
+        "title": "Juguete interactivo 'Gatobola'",
+        "description": "Pelota con cascabel para mantener entretenidos a los gatos.",
+        "category": "Juguetes para gatos",
+        "price": 150,
+        "thumbnail":["https://http2.mlstatic.com/D_NQ_NP_833792-MLM54058067793_022023-O.webp"] ,
+        "code": "JIG-5678",
+        "stock": 15
+    },
+    {
+        "title": " Correa Resistente 'PawFlex'",
+        "description": "Correa duradera y cómoda para pasear a perros grandes.",
+        "category": "Correas y collares para perros",
+        "price": 800,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrrJYFCOgZw38wqjsjDOY298kAUmg9w05Eyg&usqp=CAU"] ,
+        "code": "CPR-9876",
+        "stock": 10
+    },
+    {
+        "title": "Acuario Crystal 20L",
+        "description": "Acuario de vidrio con capacidad para 20 litros de agua.",
+        "category": "Acuarios y peceras",
+        "price": 2200,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGZecBnARszMJTa1vzwNwCw4x9IfzAv8XAW7uf5v54xfwauFXAvLD2XX35eUPls9cSOxo&usqp=CAU"] ,
+        "code": " ACP-4321",
+        "stock": 25
+    },
+    {
+        "title": "Peine Desenredador 'FurCare'",
+        "description": "Peine especial para desenredar el pelaje de mascotas de pelo largo.",
+        "category": "Cuidado del pelaje",
+        "price": 300,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrN93agc9dtb2LC4ABc11CzFxtGOZ1YMxDIiN6n-OHoCeV6-8iF61CdhEJZUh_zPmgGF8&usqp=CAU"] ,
+        "code": "CPD-2468",
+        "stock": 25
+    },
+    {
+        "title": "Arnés Reflectante 'SafetyWalk'",
+        "description": "Arnés con material reflectante para mayor seguridad en paseos nocturnos.",
+        "category": "Correas y collares para perros",
+        "price": 350,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOIzfWf2EeI5uomthg_4SBUnI-b11eioSFZQ&usqp=CAU"] ,
+        "code": " ASP-9087",
+        "stock": 25
+    },
+    {
+        "title": "Rascador para Gatos 'CatTower'",
+        "description": " Rascador con plataformas para gatos que adoran trepar.",
+        "category": "Rascadores para gatos",
+        "price": 1000,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6so5pXBBwpy0xP_YkKV6nS2Ucwhbrv_u_WwOFrQUttec9fg4wa8wMu1vbP0YPGm_8r2M&usqp=CAU"] ,
+        "code": " RCG-1357",
+        "stock": 25
+    },
+    {
+        "title": " Comedero Automático 'FeedPet'",
+        "description": "Dispensador programable de alimentos para mascotas.",
+        "category": "Comederos y bebederos automáticos",
+        "price": 900,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSokkBoqjQWg4FwG2iSpPpRedngcid135sBfmdYskoN3JfsaJeuHX1aL6-bsliv6UE-VPo&usqp=CAU"] ,
+        "code": "CAF-7531",
+        "stock": 15
+    },
+    {
+        "title": "Caja Transportadora 'PetCarrier'",
+        "description": "Cómoda y segura para llevar a tu mascota de viaje.",
+        "category": "Transportines y bolsos para mascotas",
+        "price": 1100,
+        "thumbnail":["https://http2.mlstatic.com/D_NQ_NP_967739-MLA46039309521_052021-O.webp"] ,
+        "code": "CTP-5432",
+        "stock": 25
+    },
+    {
+        "title": "Juguetes Variados para Pájaros",
+        "description": "Set de juguetes para enriquecer el ambiente de aves en jaulas.",
+        "category": "Juguetes para pájaros",
+        "price": 250,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUVwUgUyq73MvzzaLBF2IfHtTzmwnfweTacbZ08YcNOTnDdr7f4t2ptf9wajhbnptiu4w&usqp=CAU"] ,
+        "code": "JPA-2019",
+        "stock": 25
+    },
+    {
+        "title": "Cepillo de Dientes para Perros",
+        "description": "Cepillo diseñado para mantener la higiene dental de tu perro.",
+        "category": "Cuidado dental para mascotas",
+        "price": 1800,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxeo-Jx52WPHlqi7CBElNYsagavx82s0c_U7xwJ4NTPr7wCpRb_DHl8_c4wf_VC1MNE3Y&usqp=CAU"] ,
+        "code": "CDP-5555",
+        "stock": 25
+    },
+    {
+        "title": "Rueda de Ejercicio 'HamsterFit'",
+        "description": "Rueda de ejercicios para hámsters y pequeños roedores.",
+        "category": " Juguetes para roedores",
+        "price": 100,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKb51L4d8gAKJHLTEequIHNKevKX1p6REI9dw0nPkGWQZJhnjZkXv_FpLm2DxhaM6a51g&usqp=CAU"] ,
+        "code": "JHR-7890",
+        "stock": 25
+    },
+    {
+        "title": "Pelota Flotante 'AquaPlay'",
+        "description": "Pelota flotante ideal para juegos acuáticos con perros en piscinas o playas.",
+        "category": "Juguetes acuáticos para perros",
+        "price": 600,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa1mMoZjs8S_drhHPf6xY7Vm8vbx8zVhn5g-eBQAwmnV8UbvmWmL4UrnsTkJJG1MIVWWU&usqp=CAU"] ,
+        "code": "JAP-4321",
+        "stock": 25
+    },
+    {
+        "title": "Vestuario de Halloween para Mascotas",
+        "description": "Disfraz temático para divertirte con tu mascota en Halloween.",
+        "category": "Ropa y disfraces para mascotas",
+        "price": 400,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGVhkmkOg76JtpLNX6qjDNCYH-ksMuH2orpQ&usqp=CAU"] ,
+        "code": "VHM-2468",
+        "stock": 25
+    },
+    {
+        "title": "Champú Hipoalergénico 'PetCare'",
+        "description": "Champú suave para mascotas con piel sensible.",
+        "category": "Cuidado del pelaje",
+        "price": 200,
+        "thumbnail":["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzgSQrTgusIwbCdr2As6vdde86mspfvh8Jjw&usqp=CAU"] ,
+        "code": "CCH-5678",
+        "stock": 25
+    }
+]
