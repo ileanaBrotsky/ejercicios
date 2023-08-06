@@ -8,4 +8,4 @@ user:String,
 message:String
 });
 
-export const messageModel = mongoose.model(messageCollection, messageSchema);
+export const MessageModel = mongoose.model(messageCollection, messageSchema);

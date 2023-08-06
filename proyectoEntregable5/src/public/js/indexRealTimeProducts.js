@@ -5,6 +5,8 @@ const socket = io();
 //envio con emit el nombre de la funcion y los datos
 
 // agregar producto con socket
+const modal= document.getElementById('addProductModal');
+let isFull=true
 const form= document.getElementById('AddProductForm').onsubmit = e => {
     e.preventDefault()
 
@@ -14,10 +16,26 @@ const form= document.getElementById('AddProductForm').onsubmit = e => {
     const code = document.querySelector('input[name=code]').value
     const stock = parseInt(document.querySelector('input[name=stock]').value)
     const category = document.querySelector('input[name=category]').value
-
-    const product = {title, description, price, thumbnail:[], code, stock, category, status: true}
-    socket.emit('addNewProduct', product)
-    form.reset();
+   
+    const product = {title, description, price, code, stock, category, status: true}
+    if(Object.values(product).includes('')||Object.values(product).includes(null)||Object.values(product).includes(undefined)){
+        isFull = false
+        console.log(product)
+      }
+      else{
+        isFull = true
+      }
+    if(isFull){
+        socket.emit('addNewProduct', product)
+        modal.hide()
+    }
+  else{
+    Swal.fire({
+        title: "Oooops",
+       text: "Debes completar todos los campos",
+        allowOutsideClick: false,
+      })
+  }
 }
 
 socket.on("uploadList",productsList=>{
@@ -33,23 +51,21 @@ socket.on("uploadList",productsList=>{
                 <td>${product.price}</td>
                 <td>${product.category}</td>
                 <td>${product.stock}</td>
-                <td>  <button type="button" class="btn btn-warning w-100 mb-1"  data-bs-toggle="modal" data-bs-target="#UploadProductModal" id="btn-upload">Modificar</button>
-                <button type="button" class="btn btn-danger w-100 mb-1" id="btn-delete">Eliminar</button>
-                </td>
+              
             </tr>`
         })
 
     tableBody.innerHTML=html
 });
 // modificar producto desde socket
-let btnUpload = document.getElementById("btn-upload");
+// let btnUpload = document.getElementById("btn-upload");
 
-btnUpload.addEventListener("click", (evt) => {
-  console.log("entro en la funcion modificar", evt)
-})
+// btnUpload.addEventListener("click", (evt) => {
+//   console.log("entro en la funcion modificar", evt)
+// })
 //eliminar producto desde socket
-let btnDelete = document.getElementById("btn-delete");
+// let btnDelete = document.getElementById("btn-delete");
 
-btnDelete.addEventListener("click", (evt) => {
-  console.log("entro en la funcion eliminar", evt)
-})
+// btnDelete.addEventListener("click", (evt) => {
+//   console.log("entro en la funcion eliminar", evt)
+// })

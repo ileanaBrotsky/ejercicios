@@ -4,8 +4,8 @@ import handlebars from "express-handlebars"
 import { Server } from "socket.io";
 import viewsRouter from "./routes/views.router.js"
 import mongoose from "mongoose"
-import { messageModel } from "./dao/models/message.model.js";
-import { productModel } from "./dao/models/product.model.js";
+import { MessageModel } from "./dao/models/message.model.js";
+import { ProductModel } from "./dao/models/product.model.js";
 
 const app = express();
 
@@ -36,7 +36,7 @@ mongoose.connect(url,{dbName:"ecommerce"})
               socket.on('new',async(user)=>{
                   console.log(`${user} se acaba de conectar`);
                   try {
-                      messages = await messageModel.find().lean().exec();
+                      messages = await MessageModel.find().lean().exec();
                       console.log("los mensajes de la base son",messages)
                       io.emit('messagesLogs', messages)
                     } catch (error) {
@@ -45,7 +45,7 @@ mongoose.connect(url,{dbName:"ecommerce"})
           })
             socket.on('message', async(data)=>{
                 const messageNew = data;
-                const messageGenerated = new messageModel(messageNew);
+                const messageGenerated = new MessageModel(messageNew);
                 try {
                 await messageGenerated.save();
                   console.log({ messageGenerated });
@@ -61,11 +61,11 @@ mongoose.connect(url,{dbName:"ecommerce"})
             socket.on('addNewProduct', async data =>{
               console.log("el producto es",data);
               const productNew = data;
-              const productGenerated = new productModel(productNew);
+              const productGenerated = new ProductModel(productNew);
               try {
                 let result= await productGenerated.save();
                 console.log({ productGenerated });
-                const listUploaded= await  productModel.find().lean().exec();
+                const listUploaded= await  ProductModel.find().lean().exec();
                 socket.emit("uploadList",listUploaded)
               }
               catch (error) {

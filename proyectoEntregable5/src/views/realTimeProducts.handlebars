@@ -16,7 +16,7 @@
                   <th scope="col">Precio</th>
                   <th scope="col">Categoria</th>
                   <th scope="col">Stock</th>
-                  <th scope="col">Acciones</th>
+                  {{!-- <th scope="col">Acciones</th> --}}
                </tr>
             </thead>
             <tbody id="tableProductsBody">
@@ -28,9 +28,9 @@
                   <td>{{this.price}}</td>
                   <td>{{this.category}}</td>
                   <td>{{this.stock}}</td>
-                  <td>  <button type="button" class="btn btn-warning w-100 mb-1"  data-bs-toggle="modal" data-bs-target="#UploadProductModal" id="btn-upload">Modificar</button>
+                  {{!-- <td>  <button type="button" class="btn btn-warning w-100 mb-1"  data-bs-toggle="modal" data-bs-target="#UploadProductModal" id="btn-upload">Modificar</button>
                         <button type="button" class="btn btn-danger w-100 mb-1" id="btn-delete">Eliminar</button>
-                   </td>
+                   </td> --}}
                </tr>
                   {{/each}}
           </table>
@@ -161,5 +161,6 @@
 
 {{!-- siempre socket antes que el propio --}}
 <script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> 
 <script src="/js/indexRealTimeProducts.js"></script>
