@@ -29,48 +29,72 @@ res.send(newCart)
 }
 })
 //Ver un carrito
-router.get("/carts/:cid", async (req, res)=>{
-let cid= parseInt(req.params.cid);
+router.get("/carts/:idc", async (req, res)=>{
+let cartID= req.params.idc;
+let productsInCart=[]
+let totalAmount=0
+let cart=null
 try{
-  const cart= await CartModel.findById(cid)
-
+   cart= await CartModel.findById(cartID).exec()
+  console.log("el carrito es", cart)
+  if(cart.products.length>0){
+    //console.log("hay productos",cart.products.length )
+      cart.products.forEach( async(p)=>{
+        try{
+          const prod= await ProductModel.findById(p.id).exec()
+          //console.log('producto:',prod)
+          productsInCart.push(prod)
+          totalAmount= totalAmount + prod.price * p.quantity
+          console.log("los productos en el carro son",productsInCart)
+        console.log("el total a pagar es",totalAmount)
+      
+        } catch(e){
+          console.log("cannot get products in cart with mongoose", error);
+        }
+      }) 
+     }
+     res.render('my_cart',{cart,totalAmount,productsInCart})
 }catch (error) {
-    console.log("cannot get carts with mongoose", error);
-  }
-})
+  console.log("cannot get carts with mongoose", error);
+}
 
+
+})
+//====================================================//
 //agregar producto a un carrito
 router.get("/carts/:idc/:idp", async (req, res)=>{
   let cartID= req.params.idc;
   let prodID= req.params.idp;
-  const quantity= req.query.quantity||1
-  let existingProduct= false
+  let quantity= req.query.quantity||1
+  let existingProduct=null
   try{
     const cart= await CartModel.findById(cartID)
     console.log("el carrito es", cart.products)
-  cart.products.forEach(p=>{
-    console.log("el id es", p.id)
-    console.log("el prodID", prodID)
-    if(p.id===prodID){  
-      existingProduct=true
-      p.quantity=p.quantity+quantity
-      console.log("el producto existe")
+    if(cart.products.length>0){
+      console.log('hay productos')
+      existingProduct= cart.products.find(p=>p.id==prodID)
     }
-    else{console.log("el producto es nuevo")}
-  })
-  if(!existingProduct){
-    cart.products.push(
-      {id:prodID,
-      quantity})
-  }
-  const result= cart.save()
-  res.send(result)
-
+       if(!existingProduct){
+      console.log("el producto no existe")
+      cart.products.push(
+        {id:prodID,
+        quantity})
+      }
+  else{
+      cart.products.forEach(p=>{
+        if(p.id===prodID){  
+          console.log("el producto existe")
+          p.quantity=p.quantity+quantity
+          }
+        })
+      }
+  cart.save()
+  res.redirect("/carts");
 }    
    catch (error) {
       console.log("cannot get carts with mongoose", error);
     }
-
+    
 })
 //====================================================================//
 //  PRODUCTS - Ver todos los productos con accion agregar al carrito
@@ -80,12 +104,9 @@ router.get("/products", async (req, res) => {
    let query=req.query.query||null
    let sort=req.query.sort||null
   try {
-    if(query){
+    
       const products = await ProductModel.find(query).lean().exec();
-    }
-    else{
-      const products = await ProductModel.find().lean().exec();
-    }
+    
     
     if (limit && limit <= products.length) {
       products.length=limit

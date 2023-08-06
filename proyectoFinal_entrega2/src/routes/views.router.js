@@ -73,10 +73,8 @@ router.get("/carts/:idc/:idp", async (req, res)=>{
     if(cart.products.length>0){
       console.log('hay productos')
       existingProduct= cart.products.find(p=>p.id==prodID)
-      console.log('se encontro el producto',existingProduct)
     }
-   
-    if(!existingProduct){
+       if(!existingProduct){
       console.log("el producto no existe")
       cart.products.push(
         {id:prodID,
