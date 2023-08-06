@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-between align-items-center p-4">
+
+         <h1>Estos son los carritos</h1>
+         <a type="button" class="btn btn-secondary " href="/create_cart"><span class="h4">+</span> Agregar nuevo</a>
+   </div>
+    <div class="row d-flex justify-content-center p-4">
+          <table class="table-responsive table table-striped table-bordered" >
+           
+            <thead>
+               <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Productos</th>
+                  <th scope="col">Acciones</th>
+               </tr>
+            </thead>
+            <tbody id="tableProductsBody">
+               {{#each carts}}
+               <tr>
+                  <th scope="row">{{this._id}}</th>
+                  <td>{{#each this.products}}id: {{this.id}},{{/each}}</td>
+                  <td>  <a type="button" class="btn btn-warning w-100 mb-1" href="/update/{{this.code}}">Modificar<a>
+                        <a type="button" class="btn btn-danger w-100 mb-1" href="/delete/{{this.code}}">Eliminar</a>
+                   </td>
+               </tr>
+                  {{/each}}
+          </table>
+</div>
