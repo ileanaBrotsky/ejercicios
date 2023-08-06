@@ -35,7 +35,7 @@ let productsInCart=[]
 let totalAmount=0
 let cart=null
 try{
-   cart= await CartModel.findById(cartID).exec()
+   cart= await CartModel.findOne({_id:cartID}).exec()
   console.log("el carrito es", cart)
   if(cart.products.length>0){
     //console.log("hay productos",cart.products.length )
@@ -145,21 +145,22 @@ router.post("/create", async (req, res) => {
 
 // Vista para modificar producto existente
 router.get("/update/:code", async (req, res) => {
-  console.log("el req es", req.params);
   const code = req.params.code;
   try {
     const productSelected = await ProductModel.findOne({ code: code });
-    console.log("obtenido con exito", productSelected);
     res.render("update", productSelected);
-  } catch (error) {
+  }
+  catch (error) 
+  {
     console.log("cannot update products", error);
   }
 });
 
 //Accion modificar un producto existente
-router.put("/update/:code", async (req, res) => {
+router.post("/update", async (req, res) => {
   let code = req.body.code;
   let productToUpdate = req.body;
+  console.log("el producto modificado", productToUpdate)
   if (
     !productToUpdate.code ||
     !productToUpdate.description ||
@@ -170,8 +171,8 @@ router.put("/update/:code", async (req, res) => {
     return res.send({ status: "error", error: "Valores incompletos" });
   }
   try {
-  let result = await ProductModel.updateOne({ code: code }, productToUpdate);
-  res.send({ status: "sucess", payload: result }).redirect("/home");
+  await ProductModel.updateOne({ code: code }, productToUpdate);
+  res.redirect("/edit_products");
   }
   catch(error){
     console.log("cannot update products", error);
