@@ -1,11 +1,11 @@
 
    <div class="d-flex justify-content-between align-items-center p-4">
      
-         <h1>Este es mi carrito- id: {{cart.id}}</h1>
-         <a type="button" class="btn btn-secondary " href="/create_cart"><span class="h4">-</span> Quitar todos</a>
+         <h1>Este es mi carrito- id: </h1>
+         <a type="button" class="btn btn-secondary " href="/delete_cart"><span class="h4">-</span> Quitar todos</a>
    </div>
 
-     <div class="col-12 d-flex flex-wrap justify-content-center p-4">
+     {{!-- <div class="col-12 d-flex flex-wrap justify-content-center p-4">
       {{#each productsInCart}}
             <div class="card m-2" style="width: 18rem;">
             <img src={{this.thumbnail}}class="card-img-top" style="height:250px" alt="...">
@@ -23,5 +23,5 @@
       {{/each}}
       </div>
        <div class="d-flex justify-content-between align-items-center p-4">
-      <h3>total: {{totalAmount}}</h3>
-    </div>
+      <h3>total: {{totalAmount}}</h3> 
+    </div>--}}

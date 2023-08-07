@@ -2,10 +2,10 @@ import express from "express";
 import __dirname from './utils.js'
 import handlebars from "express-handlebars"
 import { Server } from "socket.io";
-import viewsRouter from "./routes/views.router.js"
 import mongoose from "mongoose"
 import { MessageModel } from "./dao/models/message.model.js";
 import { ProductModel } from "./dao/models/product.model.js";
+import viewsRouter from "./routes/views.router.js"
 
 const app = express();
 
@@ -26,7 +26,8 @@ let messages= [];
 
 mongoose.set('strictQuery', false);
 const url="mongodb+srv://ileanabrotsky:siv6iKzPaIw9nxR8@cluster0.kfytoyf.mongodb.net/"
-mongoose.connect(url,{dbName:"ecommerce"}) 
+const enviroment= async()=>{
+  await mongoose.connect(url,{dbName:"ecommerce"}) 
     .then(async ()=>{
 
           //Server
@@ -78,4 +79,5 @@ mongoose.connect(url,{dbName:"ecommerce"})
       })
       .catch(e=>{
           console.log("Can't connect to DB");
-      })
+      })}
+       enviroment();

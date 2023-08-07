@@ -13,17 +13,17 @@ router.get("/", async (req, res) => {
 //CARRITO - Ver todos los carritos
 router.get("/carts", async (req, res) => {
   try {
- const carts= await CartModel.find().lean().exec()
+ const carts= await CartModel.find().populate("products.product").lean().exec()
     res.render('carts',{carts, style:'index.css'})
   } catch (error) {
     console.log("cannot get carts with mongoose", error);
   }
 });
 //Crear un carrito
-router.post("/", async()=>{
+router.get("/create_cart", async(req, res)=>{
   try {
-const newCart= await CartModel.create({products:[]})
-res.send(newCart)
+await CartModel.create({products:[]})
+res.redirect("/carts")
 } catch (error) {
   console.log("cannot create  cart with mongoose", error);
 }
@@ -31,29 +31,16 @@ res.send(newCart)
 //Ver un carrito
 router.get("/carts/:idc", async (req, res)=>{
 let cartID= req.params.idc;
-let productsInCart=[]
 let totalAmount=0
-let cart=null
+console.log("el cartId",cartID)
+console.log("el Id 64d010993021e5b79249df1f")
 try{
-   cart= await CartModel.findOne({_id:cartID}).exec()
-  console.log("el carrito es", cart)
-  if(cart.products.length>0){
-    //console.log("hay productos",cart.products.length )
-      cart.products.forEach( async(p)=>{
-        try{
-          const prod= await ProductModel.findById(p.id).exec()
-          //console.log('producto:',prod)
-          productsInCart.push(prod)
-          totalAmount= totalAmount + prod.price * p.quantity
-          console.log("los productos en el carro son",productsInCart)
-        console.log("el total a pagar es",totalAmount)
-      
-        } catch(e){
-          console.log("cannot get products in cart with mongoose", error);
-        }
-      }) 
-     }
-     res.render('my_cart',{cart,totalAmount,productsInCart})
+ const cart= await CartModel.findById(cartID).populate('products.product')
+//  cart.products.forEach(p=>{
+//   totalAmount=totalAmount+p.quantity*p.price
+ //})
+  console.log("el carrito es", JSON.stringify(cart,null,'\t'))
+      res.render('my_cart',{cart, totalAmount})
 }catch (error) {
   console.log("cannot get carts with mongoose", error);
 }
@@ -70,6 +57,7 @@ router.get("/carts/:idc/:idp", async (req, res)=>{
   try{
     const cart= await CartModel.findById(cartID)
     console.log("el carrito es", cart.products)
+    
     if(cart.products.length>0){
       console.log('hay productos')
       existingProduct= cart.products.find(p=>p.id==prodID)
@@ -77,7 +65,7 @@ router.get("/carts/:idc/:idp", async (req, res)=>{
        if(!existingProduct){
       console.log("el producto no existe")
       cart.products.push(
-        {id:prodID,
+        {product:prodID,
         quantity})
       }
   else{
@@ -97,20 +85,18 @@ router.get("/carts/:idc/:idp", async (req, res)=>{
     
 })
 //====================================================================//
-//  PRODUCTS - Ver todos los productos con accion agregar al carrito
+//  PRODUCTS 
+// Ver todos los productos con accion agregar al carrito
 router.get("/products", async (req, res) => {
-  let limit = parseInt(req.query.limit)||10;
-   let page= parseInt(req.query.page||1)
    let query=req.query.query||null
    let sort=req.query.sort||null
   try {
-    
-      const products = await ProductModel.find(query).lean().exec();
-    
-    
-    if (limit && limit <= products.length) {
-      products.length=limit
-    }
+      // const products = await ProductModel.paginate({},{
+      //   page: parseInt(req.query.page)||1,
+      //   limit: parseInt(req.query.limit)||10,
+      //   lean: true
+      // })
+      const products = await ProductModel.find().lean().exec();
     res.render("products", { products, style: "index.css" });
   } catch (error) {
     console.log("cannot get products with mongoose", error);

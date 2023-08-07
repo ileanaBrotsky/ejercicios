@@ -17,7 +17,7 @@
                {{#each carts}}
                <tr>
                   <th scope="row">{{this._id}}</th>
-                  <td>{{#each this.products}}id: {{this.id}},{{/each}}</td>
+                  <td>{{#each this.products}} <span class="fw-bold"> item: </span> {{this.product.title}},<span class="fw-bold"> cantidad: </span> {{this.quantity}}<br> {{/each}}</td>
                   <td>  <a type="button" class="btn btn-warning w-100 mb-1" href="/update/{{this.code}}">Modificar<a>
                         <a type="button" class="btn btn-danger w-100 mb-1" href="/delete/{{this.code}}">Eliminar</a>
                    </td>
