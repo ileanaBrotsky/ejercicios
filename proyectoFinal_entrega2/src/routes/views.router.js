@@ -31,8 +31,6 @@ try{
  cart.products.forEach(item=>{ 
   totalAmount= totalAmount + item.quantity * item.product.price  
  })
-//  console.log("el preci total es",  totalAmount)
-//  console.log("el carrito es", JSON.stringify(cart,null,'\t'))
       res.render('my_cart',{cart, totalAmount})
 }catch (error) {
   console.log("cannot get carts with mongoose", error);
@@ -42,20 +40,63 @@ try{
 //  PRODUCTS 
 // Ver todos los productos con accion agregar al carrito
 router.get("/products", async (req, res) => {
-   let query=req.query.query||null
-   let sort=req.query.sort||null
+   let query_filter =req.query.query_filter||null
+   let query_value =parseInt(req.query.query_value)||null
+   let limit =parseInt(req.query.limit)||10
+   let page=parseInt(req.query.page) || 0
+   let sort=parseInt(req.query.sort)||null
+  //  console.log("query_filter",query_filter)
+  //  console.log("query_value",query_value)
+  
   try {
       // const products = await ProductModel.paginate({},{
       //   page: parseInt(req.query.page)||1,
       //   limit: parseInt(req.query.limit)||10,
       //   lean: true
       // })
-      const products = await ProductModel.find().lean().exec();
-    res.render("products", { products, style: "index.css" });
+
+    //   const products = await ProductModel.find().lean().exec();
+    
+let products= await ProductModel.aggregate([
+  //1-buscar con un filtro o todos
+  // {$match: {query_filter: query_value}},NO ANDA
+  {$match: {}},
+  //2-buscar con limite o 10
+  {$limit: limit},
+   //3- ordenar asc o desc segun corresponda o nada
+  {$sort: {price: sort}}
+
+])
+res.render("products", { products, style: "index.css" });
+
+
   } catch (error) {
     console.log("cannot get products with mongoose", error);
   }
 });
+
+// Ver todos los productos con PAGINACION
+router.get("/products_paginated", async (req, res) => {
+  
+  let limit =parseInt(req.query.limit)||10
+  let page=parseInt(req.query.page) || 0
+  let sort=parseInt(req.query.sort)||null
+ //  console.log("query_filter",query_filter)
+ //  console.log("query_value",query_value)
+ 
+ try {
+     const result = await ProductModel.paginate({},{
+       page: parseInt(req.query.page)||1,
+       limit: parseInt(req.query.limit)||10,
+       lean: true
+     })
+res.render("products_paginated", result);
+ } catch (error) {
+   console.log("cannot get products with mongoose", error);
+ }
+});
+
+
 // vista productos con disparadores de acciones
 router.get("/edit_products", async (req, res) => {
   try {

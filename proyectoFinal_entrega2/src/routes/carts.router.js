@@ -57,5 +57,16 @@ router.delete("/delete/:id", async (req, res) => {
     console.log("cannot delete cart", error);
   }
 });
-
+// Accion eliminar todos los productos de un carrito existente
+router.post("/deleteProducts_cart/:idCart", async (req, res) => {
+  const id = req.params.idCart;
+  const products=[];
+  try {
+  const result= await CartModel.updateOne({ _id: id}, {products: products});
+  res.send({ status: "sucess", payload: result});
+  }
+  catch(error){
+    console.log("cannot delete cart", error);
+  }
+});
 export default router

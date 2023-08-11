@@ -34,7 +34,7 @@ router.post("/update/:code", async (req, res) => {
   }
   try {
   await ProductModel.updateOne({ code: code }, productToUpdate);
-  console.log(" modificado", productToUpdate)
+ // console.log(" modificado", productToUpdate)
   res.send({status: 200}).redirect("/edit_products");
   }
   catch(error){
