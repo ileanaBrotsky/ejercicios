@@ -6,6 +6,8 @@ import mongoose from "mongoose"
 import { MessageModel } from "./dao/models/message.model.js";
 import { ProductModel } from "./dao/models/product.model.js";
 import viewsRouter from "./routes/views.router.js"
+import productsRouter from "./routes/products.router.js"
+import cartsRouter from "./routes/carts.router.js"
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.use('/',viewsRouter);
+app.use('/api/carts',cartsRouter);
+app.use('/api/products',productsRouter);
 
 // Motores de plantilla
 app.engine('handlebars',handlebars.engine());

@@ -19,72 +19,25 @@ router.get("/carts", async (req, res) => {
     console.log("cannot get carts with mongoose", error);
   }
 });
-//Crear un carrito
-router.get("/create_cart", async(req, res)=>{
-  try {
-await CartModel.create({products:[]})
-res.redirect("/carts")
-} catch (error) {
-  console.log("cannot create  cart with mongoose", error);
-}
-})
+
 //Ver un carrito
 router.get("/carts/:idc", async (req, res)=>{
 let cartID= req.params.idc;
 let totalAmount=0
 console.log("el cartId",cartID)
-console.log("el Id 64d010993021e5b79249df1f")
 try{
- const cart= await CartModel.findById(cartID).populate('products.product')
-//  cart.products.forEach(p=>{
-//   totalAmount=totalAmount+p.quantity*p.price
- //})
-  console.log("el carrito es", JSON.stringify(cart,null,'\t'))
+ const cart= await CartModel.findById(cartID).populate('products.product').lean().exec()
+ cart.products.forEach(item=>{ 
+  totalAmount= totalAmount + item.quantity * item.product.price  
+ })
+//  console.log("el preci total es",  totalAmount)
+//  console.log("el carrito es", JSON.stringify(cart,null,'\t'))
       res.render('my_cart',{cart, totalAmount})
 }catch (error) {
   console.log("cannot get carts with mongoose", error);
 }
-
-
 })
-//====================================================//
-//agregar producto a un carrito
-router.get("/carts/:idc/:idp", async (req, res)=>{
-  let cartID= req.params.idc;
-  let prodID= req.params.idp;
-  let quantity= req.query.quantity||1
-  let existingProduct=null
-  try{
-    const cart= await CartModel.findById(cartID)
-    console.log("el carrito es", cart.products)
-    
-    if(cart.products.length>0){
-      console.log('hay productos')
-      existingProduct= cart.products.find(p=>p.id==prodID)
-    }
-       if(!existingProduct){
-      console.log("el producto no existe")
-      cart.products.push(
-        {product:prodID,
-        quantity})
-      }
-  else{
-      cart.products.forEach(p=>{
-        if(p.id===prodID){  
-          console.log("el producto existe")
-          p.quantity=p.quantity+quantity
-          }
-        })
-      }
-  cart.save()
-  res.redirect("/carts");
-}    
-   catch (error) {
-      console.log("cannot get carts with mongoose", error);
-    }
-    
-})
-//====================================================================//
+
 //  PRODUCTS 
 // Ver todos los productos con accion agregar al carrito
 router.get("/products", async (req, res) => {
@@ -116,18 +69,7 @@ router.get("/create", async (req, res) => {
   res.render("create", {});
 });
 
-//Accion agregar producto nuevo
-router.post("/create", async (req, res) => {
-  const productNew = req.body;
-  const productGenerated = new ProductModel(productNew);
-  try {
-    let result= await productGenerated.save();
-    console.log({ productGenerated });
-    res.send({ status: "sucess", payload: result }).redirect("/home");
-  } catch (error) {
-    console.log("cannot create products", error);
-  }
-});
+
 
 // Vista para modificar producto existente
 router.get("/update/:code", async (req, res) => {
@@ -139,41 +81,6 @@ router.get("/update/:code", async (req, res) => {
   catch (error) 
   {
     console.log("cannot update products", error);
-  }
-});
-
-//Accion modificar un producto existente
-router.post("/update", async (req, res) => {
-  let code = req.body.code;
-  let productToUpdate = req.body;
-  console.log("el producto modificado", productToUpdate)
-  if (
-    !productToUpdate.code ||
-    !productToUpdate.description ||
-    !productToUpdate.price ||
-    !productToUpdate.category ||
-    !productToUpdate.stock
-  ) {
-    return res.send({ status: "error", error: "Valores incompletos" });
-  }
-  try {
-  await ProductModel.updateOne({ code: code }, productToUpdate);
-  res.redirect("/edit_products");
-  }
-  catch(error){
-    console.log("cannot update products", error);
-  }
-});
-
-// Accion eliminar un producto existente
-router.get("/delete/:code", async (req, res) => {
-  const code = req.params.code;
-  try {
-  await ProductModel.deleteOne({ code: code });
-  res.redirect("/products");
-  }
-  catch(error){
-    console.log("cannot delete product", error);
   }
 });
 
