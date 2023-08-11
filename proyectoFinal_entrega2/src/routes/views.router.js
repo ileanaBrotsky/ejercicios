@@ -10,7 +10,8 @@ router.get("/", async (req, res) => {
     res.render('index',{user:user, style:'index.css'})
 });
 //====================================================================//
-//CARRITO - Ver todos los carritos
+//CARRITO 
+// Ver todos los carritos
 router.get("/carts", async (req, res) => {
   try {
  const carts= await CartModel.find().populate("products.product").lean().exec()
@@ -37,7 +38,7 @@ try{
   console.log("cannot get carts with mongoose", error);
 }
 })
-
+//====================================================================//
 //  PRODUCTS 
 // Ver todos los productos con accion agregar al carrito
 router.get("/products", async (req, res) => {
@@ -68,8 +69,6 @@ router.get("/edit_products", async (req, res) => {
 router.get("/create", async (req, res) => {
   res.render("create", {});
 });
-
-
 
 // Vista para modificar producto existente
 router.get("/update/:code", async (req, res) => {

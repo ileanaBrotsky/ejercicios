@@ -33,7 +33,6 @@ const url="mongodb+srv://ileanabrotsky:siv6iKzPaIw9nxR8@cluster0.kfytoyf.mongodb
 const enviroment= async()=>{
   await mongoose.connect(url,{dbName:"ecommerce"}) 
     .then(async ()=>{
-
           //Server
           const httpServer= app.listen(8080, () => console.log("Running..."));
           const io= new Server(httpServer);
@@ -63,7 +62,6 @@ const enviroment= async()=>{
           
                 io.emit('messagesLogs',messages)
             })
-
             socket.on('addNewProduct', async data =>{
               console.log("el producto es",data);
               const productNew = data;

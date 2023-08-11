@@ -1,12 +1,12 @@
 import { Router } from 'express'
-
 import { CartModel } from "../dao/models/cart.model.js";
+
 const router = Router()
 
 //Crear un carrito
-router.post("/api/carts/create_cart", async(req, res)=>{
+router.post("/create_cart", async(req, res)=>{
   try {
-await CartModel.create({products:[]})
+const result= await CartModel.create({products:[]})
 res.send({ status: "sucess", payload: result });
 } catch (error) {
   console.log("cannot create  cart with mongoose", error);
@@ -14,33 +14,31 @@ res.send({ status: "sucess", payload: result });
 })
 
 //agregar producto a un carrito
-router.post("/api/carts/carts/:idc/:idp", async (req, res)=>{
+router.post("/carts/:idc/:idp", async (req, res)=>{
   let cartID= req.params.idc;
   let prodID= req.params.idp;
   let quantity= req.query.quantity||1
   let existingProduct=null
   try{
     const cart= await CartModel.findById(cartID)
-    console.log("el carrito es", cart.products)
     
     if(cart.products.length>0){
-      console.log('hay productos')
-      existingProduct= cart.products.find(p=>p.id==prodID)
-    }
-       if(!existingProduct){
-      console.log("el producto no existe")
+      existingProduct= cart.products.filter(item =>item.product._id==prodID)
+     }
+     if(!existingProduct){
       cart.products.push(
         {product:prodID,
         quantity})
+       }
+   else{
+    console.log("el producto existe", existingProduct)
+       cart.products.forEach(item=>{
+       if(item.product._id==prodID){  
+           item.quantity+=1
+           }
+     })
       }
-  else{
-      cart.products.forEach(p=>{
-        if(p.id===prodID){  
-          console.log("el producto existe")
-          p.quantity=p.quantity+quantity
-          }
-        })
-      }
+  
   cart.save()
   res.redirect("/carts");
 }    
@@ -48,6 +46,16 @@ router.post("/api/carts/carts/:idc/:idp", async (req, res)=>{
       console.log("cannot get carts with mongoose", error);
     }   
 })
-
+// Accion eliminar un carrito existente
+router.delete("/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+  const result= await CartModel.deleteOne({ _id: id});
+  res.send({ status: "sucess", payload: result});
+  }
+  catch(error){
+    console.log("cannot delete cart", error);
+  }
+});
 
 export default router
