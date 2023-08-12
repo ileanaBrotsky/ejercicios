@@ -97,6 +97,25 @@ cart.save()
     console.log("cannot update quantity of a product in cart", error);
   }
 });
+//Accion de agregar a un carrito un array pasado por query
+router.put("/:cid", async (req, res) => {
+  const idCart = req.params.cid;
+  //example query products=64cf9b52c0622518055592be-6
+  const queryProducts =req.query?.products;
+  let arrayData=[]
+  if(queryProducts){
+    arrayData=queryProducts.split("-")
+  }
+  const newProducts=[{product: arrayData[0],quantity:arrayData[1]}]
+  console.log("los newProducts", newProducts)
+  try {
+    const result= await CartModel.updateOne({ _id: idCart}, {products: newProducts});
+    res.send({ status: "sucess", payload: result});
+  }
+  catch(error){
+    console.log("cannot update products array in cart", error);
+  }
+});
 
 // Accion eliminar un carrito existente
 router.delete("/delete/:id", async (req, res) => {
