@@ -1,0 +1,29 @@
+ <div class="p-4">
+  <h1>Este es el sector de chat</h1>
+  </div>
+   <div class="row" style="height: 700px;">
+    <div class="col border border-2 p-4 m-3">
+       <h3 > Bienvenid@ <span id="userName"></span>!</h3>
+    <div class="mb-1">
+
+      <textarea
+        class="form-control h-50"
+        id="chatBox"
+        rows="5"
+        placeholder="Deja tu comentario aqui"
+      ></textarea>
+    </div>
+    </div>
+    <div class="col border border-2 p-4 m-3">
+     <h3>Chat:</h3> 
+      <p id="messagesLogs"></p>
+    </div>
+    
+  </div>
+ 
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/indexChat.js"></script>

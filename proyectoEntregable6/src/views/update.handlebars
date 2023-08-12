@@ -1,0 +1,55 @@
+  <div class="d-flex justify-content-between align-items-center p-4">
+
+         <h1 class="" id="addProductModalLabel">Modificando Producto <span class=" text-success">{{title}}</span> </h1>
+</div>
+  
+ <div class="row d-flex justify-content-center p-4">
+         <div class="col-6 border border-primary-subtle border-3 rounded ">
+      <form id="UploadProductForm" action="/update"  method="post">
+      <div class="row pt-2 ">
+         <div class="col mb-3">
+            <label for="title" class="form-label">Producto</label>
+            <input type="text" name="title"  class="form-control" id="title" placeholder="ingrese el nombre." value="{{title}}">
+         </div>
+         
+         <div class="col-3 mb-3">
+            <label for="code" class="form-label">Código</label>
+            <input type="text" name="code"  class="form-control" id="code" placeholder="ingrese el código" value="{{code}}">
+         </div>
+      </div>  
+      <div class="row">
+            <div class="col mb-3">
+            <label for="title" class="form-label">Descripción</label>
+            <input type="text" name="description"  class="form-control" id="description" placeholder="ingrese descripción"  value="{{description}}">
+         </div>
+      </div>   
+      <div class="row">
+         <div class="col-9 mb-3">
+            <label for="category" class="form-label">Categoría</label>
+            <input type="text" name="category"  class="form-control" id="category" placeholder="ingrese categoría" value="{{category}}">
+         </div>
+         <div class="col-3 mb-3">
+            <label for="stock" class="form-label">Stock</label>
+            <input type="number" name="stock"  class="form-control" id="stock" placeholder="ingrese stock" value="{{stock}}">
+         </div>
+         </div> 
+         <div class="row">
+            <div class="col mb-3">
+            <label for="thumbnail" class="form-label">Imagen</label>
+            <input type="text" name="thumbnail"  class="form-control" id="thumbnail" placeholder="ingrese dir img" value="{{thumbnail}}">
+         </div>
+         </div>
+         <div class="col-2 mb-3">
+            <label for="price" class="form-label">Precio</label>
+            <input type="number" name="price"  class="form-control" id="price" placeholder="ingrese el precio del producto" value="{{price}}">
+         </div>
+      <div class="row">
+         <div class="col mb-3">
+         <button type="submit" class="btn btn-primary">Cargar</button>
+      </div>
+   </div>
+   </form>
+   </div>
+</div>
+ </div> 
+</div>
