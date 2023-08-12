@@ -18,14 +18,14 @@ router.post("/carts/:idc/:idp", async (req, res)=>{
   let cartID= req.params.idc;
   let prodID= req.params.idp;
   let quantity= req.query.quantity||1
-  let existingProduct=null
+  let existingProduct=[]
   try{
     const cart= await CartModel.findById(cartID)
     
     if(cart.products.length>0){
       existingProduct= cart.products.filter(item =>item.product._id==prodID)
      }
-     if(!existingProduct){
+     if(existingProduct.length==0){
       cart.products.push(
         {product:prodID,
         quantity})
@@ -58,8 +58,8 @@ router.delete("/delete/:id", async (req, res) => {
   }
 });
 // Accion eliminar todos los productos de un carrito existente
-router.post("/deleteProducts_cart/:idCart", async (req, res) => {
-  const id = req.params.idCart;
+router.delete("/:cid", async (req, res) => {
+  const id = req.params.cid;
   const products=[];
   try {
   const result= await CartModel.updateOne({ _id: id}, {products: products});

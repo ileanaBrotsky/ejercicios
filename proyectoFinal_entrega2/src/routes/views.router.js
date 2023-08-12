@@ -38,38 +38,36 @@ try{
 })
 //====================================================================//
 //  PRODUCTS 
-// Ver todos los productos con accion agregar al carrito
+// Ver todos los productos con accion agregar al carrito, con aggregate y pagination
 router.get("/products", async (req, res) => {
-   let query_filter =req.query.query_filter||null
-   let query_value =parseInt(req.query.query_value)||null
-   let limit =parseInt(req.query.limit)||10
-   let page=parseInt(req.query.page) || 0
-   let sort=parseInt(req.query.sort)||null
-  //  console.log("query_filter",query_filter)
-  //  console.log("query_value",query_value)
-  
+   let limit =parseInt(req.query?.limit)||10
+   let page=parseInt(req.query?.page) || 0
+   let sort=parseInt(req.query?.sort)||1
+   //example price,500
+   const queryParams= req.query?.query||''
+  //  console.log("la queryParams", queryParams)
+  let queryMongo={};
+   if(queryParams){
+    let field= queryParams.split(",")[0]
+    let value= queryParams.split(",")[1]
+     
+    if(!isNaN(parseInt(value)))  {
+      value= parseInt(value)
+    }
+    queryMongo[field]=value
+  console.log("la query de mongo es", queryMongo)
+   }
   try {
-      // const products = await ProductModel.paginate({},{
-      //   page: parseInt(req.query.page)||1,
-      //   limit: parseInt(req.query.limit)||10,
-      //   lean: true
-      // })
-
-    //   const products = await ProductModel.find().lean().exec();
-    
 let products= await ProductModel.aggregate([
   //1-buscar con un filtro o todos
-  // {$match: {query_filter: query_value}},NO ANDA
-  {$match: {}},
+  // {$match: {queryMongo}},//NO ANDA
   //2-buscar con limite o 10
-  {$limit: limit},
+   {$limit: limit},
    //3- ordenar asc o desc segun corresponda o nada
-  {$sort: {price: sort}}
+   {$sort: {price: sort}}
 
 ])
 res.render("products", { products, style: "index.css" });
-
-
   } catch (error) {
     console.log("cannot get products with mongoose", error);
   }
@@ -77,17 +75,27 @@ res.render("products", { products, style: "index.css" });
 
 // Ver todos los productos con PAGINACION
 router.get("/products_paginated", async (req, res) => {
-  
-  let limit =parseInt(req.query.limit)||10
-  let page=parseInt(req.query.page) || 0
-  let sort=parseInt(req.query.sort)||null
- //  console.log("query_filter",query_filter)
- //  console.log("query_value",query_value)
- 
+  let limit =parseInt(req.query?.limit)||10
+   let page=parseInt(req.query?.page) || 1
+   let sort=parseInt(req.query?.sort)||1
+   //example price,500
+   const queryParams= req.query?.query||''
+  //  console.log("la queryParams", queryParams)
+  let queryMongo={};
+   if(queryParams){
+    let field= queryParams.split(",")[0]
+    let value= queryParams.split(",")[1]
+     
+    if(!isNaN(parseInt(value)))  {
+      value= parseInt(value)
+    }
+    queryMongo[field]=value
+  //console.log("la query de mongo es", queryMongo)
+   }
  try {
-     const result = await ProductModel.paginate({},{
-       page: parseInt(req.query.page)||1,
-       limit: parseInt(req.query.limit)||10,
+     const result = await ProductModel.paginate(queryMongo,{
+       page,
+       limit,
        lean: true
      })
 res.render("products_paginated", result);
