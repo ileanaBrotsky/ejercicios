@@ -54,8 +54,11 @@
                   <td>{{this.price}}</td>
                   <td>{{this.category}}</td>
                   <td>{{this.stock}}</td>
-                  <td>  <a type="button" class="btn btn-warning w-100 mb-1" href="/update/{{this.code}}">Modificar<a>
-                        <a type="button" class="btn btn-danger w-100 mb-1" href="/api/products/delete/{{this.code}}">Eliminar</a>
+                  <td>  
+                     <a type="button" class="btn btn-primary w-100 mb-1" href="/product/{{this.code}}">Ver</a>
+                     <a type="button" class="btn btn-success w-100 mb-1" href="/api/carts/carts/64d010993021e5b79249df1f/{{this._id}}">Agregar al carrito</a>
+                     <a type="button" class="btn btn-warning w-100 mb-1" href="/update/{{this.code}}">Modificar<a>
+                     <a type="button" class="btn btn-danger w-100 mb-1" href="/api/products/delete/{{this.code}}">Eliminar</a>
                    </td>
                </tr>
                   {{/each}}

@@ -91,7 +91,7 @@ router.put("/:cid/products/:pid", async (req, res) => {
         })
     }
 cart.save()
-  res.send({ status: "sucess", payload: cart.products}).redirect("/carts");
+  res.send({ status: "sucess", payload: cart.products});
   }
   catch(error){
     console.log("cannot update quantity of a product in cart", error);

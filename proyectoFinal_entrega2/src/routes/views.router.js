@@ -105,7 +105,7 @@ res.render("products_paginated", result);
 });
 
 
-// vista productos con disparadores de acciones
+// vista para editar productos con disparadores de acciones
 router.get("/edit_products", async (req, res) => {
   try {
     const products = await ProductModel.find().lean().exec();
@@ -131,6 +131,19 @@ router.get("/update/:code", async (req, res) => {
     console.log("cannot update products", error);
   }
 });
+//Vista para ver un producto
+router.get("/product/:code", async (req, res) => {
+  const code = req.params.code;
+  try {
+    const productSelected = await ProductModel.findOne({ code: code });
+    res.render("product_view", productSelected);
+  }
+  catch (error) 
+  {
+    console.log("cannot see product", error);
+  }
+});
+
 
 //====================================================================//
 //CHAT- con websockets
