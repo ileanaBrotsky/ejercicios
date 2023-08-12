@@ -6,8 +6,9 @@ router.post("/login",  async(req, res)=>{
     const {email, password}= req.body
     try{
         const user= await UserModel.findOne({email, password})
+        console.log("el usuario es", user)
         if(!user)  return  res.redirect('/login')
-        else  req.session.user= user
+      req.session.user= user
         return  res.render('products', user)
     }
    catch (error) {
@@ -28,5 +29,5 @@ router.post("/register",  async (req, res)=>{
        }
       
           })
-          
+
 export default router;
