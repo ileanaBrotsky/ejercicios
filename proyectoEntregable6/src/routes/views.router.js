@@ -4,14 +4,25 @@ import { CartModel } from "../dao/models/cart.model.js";
 import { MessageModel } from "../dao/models/message.model.js";
 
 const router = Router();
+//MIDLEWARES
+function auth(req, res, next){
+  return req.session?.user ? next() : res.status(401).redirect('/')
+  }
+  // function authAdmin(req, res, next){
+  //   return req.session?.user && req.session.admin ? next() : res.status(401).send('Auth error')
+  //   } 
 //LOGIN
-//home entry, if there are user goes to profile if not, goes to login
-router.get("/login",  (req, res)=>{
-    if(req.session?.user){
-        res.redirect('/products')
-    }
-  res.render('login',{})
+//home entry, if there are user goes to products if not, goes to login
+router.get("/",  (req, res)=>{
+  res.redirect('/login')
       })
+//login
+router.get("/login",  (req, res)=>{
+        if(req.session?.user){
+            res.redirect('/products')
+        }
+      res.render('login',{layout:'inauthLayout'})
+          })
 //register view
  router.get("/register",  (req, res)=>{   
   if(req.session?.user){
@@ -19,25 +30,18 @@ router.get("/login",  (req, res)=>{
 }
       res.render('register',{})
    })
-  function auth(req, res, next){
-     return req.session?.user ? next() :  res.redirect('/')
-     }
-  //profile view
-  router.get("/profile", auth, (req, res)=>{   
-      const user= req.session.user
-     res.render('profile',user)
-      })
+
 //logout
 router.get("/logout",(req, res)=>{   
   req.session.destroy(err=>{
-    if(!err)  res.redirect('/login')
+    if(!err)  res.redirect('/')
     else return res.json({status:"Logout ERROR", body:err})
   })
 })
 //====================================================================//
 //CARRITO 
 // Ver todos los carritos
-router.get("/carts", async (req, res) => {
+router.get("/carts", auth, async (req, res) => {
   try {
  const carts= await CartModel.find().populate("products.product").lean().exec()
     res.render('carts',{carts, style:'index.css'})
@@ -47,7 +51,7 @@ router.get("/carts", async (req, res) => {
 });
 
 //Ver un carrito
-router.get("/carts/:idc", async (req, res)=>{
+router.get("/carts/:idc", auth, async (req, res)=>{
 let cartID= req.params.idc;
 let totalAmount=0
 console.log("el cartId",cartID)
@@ -64,7 +68,7 @@ try{
 //====================================================================//
 //  PRODUCTS 
 // Ver todos los productos con accion agregar al carrito, con aggregate y pagination
-router.get("/products", async (req, res) => {
+router.get("/products", auth, async (req, res) => {
    let limit =parseInt(req.query?.limit)||10
    let page=parseInt(req.query?.page) || 0
    let sort=parseInt(req.query?.sort)||1
@@ -92,14 +96,15 @@ let products= await ProductModel.aggregate([
    {$sort: {price: sort}}
 
 ])
-res.render("products", { products, style: "index.css" });
+let user = req.session.user
+res.render("products", { products, user, style: "index.css" });
   } catch (error) {
     console.log("cannot get products with mongoose", error);
   }
 });
 
 // Ver todos los productos con PAGINACION
-router.get("/products_paginated", async (req, res) => {
+router.get("/products_paginated", auth, async (req, res) => {
   let limit =parseInt(req.query?.limit)||10
    let page=parseInt(req.query?.page) || 1
    let sort=parseInt(req.query?.sort)||1
@@ -131,7 +136,7 @@ res.render("products_paginated", result);
 
 
 // vista para editar productos con disparadores de acciones
-router.get("/edit_products", async (req, res) => {
+router.get("/edit_products", auth, async (req, res) => {
   try {
     const products = await ProductModel.find().lean().exec();
     res.render('edit_products',{products, style:'index.css'})
@@ -157,7 +162,7 @@ router.get("/update/:code", async (req, res) => {
   }
 });
 //Vista para ver un producto
-router.get("/product/:code", async (req, res) => {
+router.get("/product/:code",auth, async (req, res) => {
   const code = req.params.code;
   try {
     const productSelected = await ProductModel.findOne({ code: code });
@@ -172,7 +177,7 @@ router.get("/product/:code", async (req, res) => {
 
 //====================================================================//
 //CHAT- con websockets
-router.get("/chat", async(req, res) => {
+router.get("/chat",auth, async(req, res) => {
   try {
     const messages = await MessageModel.find().lean().exec();
   res.render("chat", { messages, style: "index.css" });
@@ -182,7 +187,7 @@ router.get("/chat", async(req, res) => {
   }
 });
 //=============CRUD CON SOCKETS=====================//
-router.get('/realtimeproducts',async (req, res)=>{
+router.get('/realtimeproducts', auth, async (req, res)=>{
   try {
     const products = await ProductModel.find().lean().exec();
       let limit = parseInt(req.query.limit);

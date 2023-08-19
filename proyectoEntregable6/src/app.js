@@ -17,14 +17,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.static(__dirname + '/public'));
-
-//routers
-app.use('/',viewsRouter);
-app.use('/api/carts',cartsRouter);
-app.use('/api/products',productsRouter);
-app.use('/api/session', sessionRouter)
 
 // Motores de plantilla
 app.engine('handlebars',handlebars.engine());
@@ -32,7 +25,9 @@ app.set('views',__dirname + '/views');
 app.set('view engine','handlebars');
 
 let messages= [];
+//url DB
 const url="mongodb+srv://ileanabrotsky:siv6iKzPaIw9nxR8@cluster0.kfytoyf.mongodb.net/"
+//SESSION
 app.use(session({
   store: MongoStore.create({
     mongoUrl:url,
@@ -41,31 +36,20 @@ app.use(session({
        useNewUrlParser: true,
        useUnifiedTopology: true
     },
-    ttl:15
+    ttl:100
   }),
     secret: 'secret',
   resave: false,
   saveUninitialized:false
 
 }))
-// app.get("/login", (req, res)=>{
-//   if(req.session.user) return  res.send('Already logged')  
 
-//   const { username }= req.query
 
-//    if(!username) return res.send('Need a username')
-
-//     req.session.user= username
-//     return res.send('Login sucess')
-  
-//    })
-function auth(req, res, next){
-return req.session?.user ? next() : res.status(401).send('Auth error')
-}
-   app.get("/private", auth, (req, res)=>{
-     res.send(`Private page ${req.session.user}`)
-    
-     })
+//routers
+app.use('/',viewsRouter);
+app.use('/api/carts',cartsRouter);
+app.use('/api/products',productsRouter);
+app.use('/api/session', sessionRouter)
 
 mongoose.set('strictQuery', false);
 const enviroment= async()=>{

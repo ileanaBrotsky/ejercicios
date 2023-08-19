@@ -8,8 +8,14 @@ router.post("/login",  async(req, res)=>{
         const user= await UserModel.findOne({email, password})
         console.log("el usuario es", user)
         if(!user)  return  res.redirect('/login')
+        else{
+          if(user.admin){
+            console.log('el usuario es admin')
+            req.session.admin=true
+          }
       req.session.user= user
-        return  res.render('products', user)
+        return  res.redirect('/products')
+      } 
     }
    catch (error) {
         console.log("cannot find user", error);
