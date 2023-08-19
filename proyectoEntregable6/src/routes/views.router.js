@@ -8,6 +8,7 @@ const router = Router();
 function auth(req, res, next){
   return req.session?.user ? next() : res.status(401).redirect('/')
   }
+  
   // function authAdmin(req, res, next){
   //   return req.session?.user && req.session.admin ? next() : res.status(401).send('Auth error')
   //   } 
