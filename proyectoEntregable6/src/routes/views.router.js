@@ -28,7 +28,7 @@ router.get("/login",  (req, res)=>{
   if(req.session?.user){
     res.redirect('/products')
 }
-      res.render('register',{})
+      res.render('register',{layout:'inauthLayout'})
    })
 
 //logout

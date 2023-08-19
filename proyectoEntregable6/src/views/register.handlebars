@@ -1,10 +1,37 @@
-<h1>Register</h1>
-<form action="/api/session/register" method="post">
-First Name: <input type="text" name="first_name"> <br>
-Last Name: <input type="text" name="last_name"> <br>
-Age: <input type="text" name="age"> <br>
-email: <input type="text" name="email"> <br>
-Password: <input type="password" name="password"> <br>
-<button type="submit"> cargar</button>
 
+<div class="d-flex justify-content-between align-items-center p-4">
+<h1>Registro</h1>
+</div>
+    <div class="row d-flex justify-content-center p-4">
+         <div class="col-6 border border-primary-subtle border-3 rounded ">
+<form action="/api/session/register" method="post">
+<div class="row pt-2 ">
+            <div class="col mb-3">
+            <label for="first_name" class="form-label">Nombres:</label>
+ <input type="text" class="form-control" name="first_name"> 
+ </div>
+         <div class="col mb-3">
+            <label for="last_name" class="form-label">Apellidos:</label>
+ <input type="text" class="form-control" name="last_name"> 
+ </div>
+         <div class="col mb-3">
+            <label for="age" class="form-label">Edad:</label>
+ <input type="text" class="form-control" name="age"> 
+ </div>
+         <div class="col mb-3">
+            <label for="email" class="form-label">Email</label>
+ <input type="text" class="form-control" name="email"> 
+ </div>
+         <div class="col-3 mb-3">
+            <label for="password" class="form-label">Password:</label>
+ <input type="password" class="form-control" name="password"> 
+</div>
+      <div class="row">
+         <div class="col mb-3">
+         <button type="submit" class="btn btn-primary">Cargar</button>
+      </div>
+</div>
 </form>
+<a href="/login">Sos usuario? Ingresá!</a>
+   </div>
+</div>
