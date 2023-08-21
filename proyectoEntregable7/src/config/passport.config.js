@@ -1,11 +1,52 @@
 import passport from "passport";
+import GitHubStrategy from 'passport-github2'
 import local from 'passport-local'
-import UserModel from '../dao/models/user.model.js'
+import {UserModel} from '../dao/models/user.model.js'
 import { createHash, isValidPassword } from "../utils.js";
+
+/*for github app
+Owned by: @ileanaBrotsky
+App ID: 378289
+Client ID: Iv1.1c687d8abada1fd5
+secret: 307230f9a9f6f79c61e3e57ff87681a350415593
+*/
 
 const LocalStrategy = local.Strategy
 
 const initializePassport = () => {
+
+    passport.use('github', new GitHubStrategy(
+        {
+            clientID:'Iv1.1c687d8abada1fd5',
+            clientSecret:'307230f9a9f6f79c61e3e57ff87681a350415593',
+            callbackURL:'http://localhost:8080/api/sessions/githubcallback'
+        },
+        async (accessToken, refreshToken, profile, done)=>{
+
+            console.log(profile)
+            try{
+                const user= await  UserModel.findOne({email: profile._json.email})
+            if(user){
+                console.log("el usuario existe"+ email)
+                return done(null, user)
+            }
+            const newUser= {
+                    first_name: profile._json.email,
+                    last_name:profile._json.last_name,
+                    email:profile._json.email,
+                    age: profile._json.age,
+                    password: '',
+                    rol:"usuario"
+            }
+            const result= await  UserModel.create(newUser)
+            return done(null, newUser)
+            }catch(e){
+        
+                return done('Error de login con github ' + error)
+            }
+           
+        }
+    ))
 
     // register Es el nomber para Registrar con Local
     passport.use('register', new LocalStrategy(
@@ -14,8 +55,8 @@ const initializePassport = () => {
             usernameField: 'email'
         },
         async (req, username, password, done) => {
-           const {first_name,last_name, email, age, password}= req.body
-    if(!first_name||!last_name||!email||!age||!password) return res.status(400).send({ status: "error", error: "Valores incompletos" })
+           const {first_name,last_name, email, age}= req.body
+    if(!first_name||!last_name||!email||!age) return res.status(400).send({ status: "error", error: "Valores incompletos" })
               
             try {
                 const user = await UserModel.findOne({ email: username })

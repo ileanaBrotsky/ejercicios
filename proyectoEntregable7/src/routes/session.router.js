@@ -1,5 +1,5 @@
 import { Router } from "express";
-
+import passport from "passport";
 const router = Router();
 
 //login
@@ -21,5 +21,6 @@ router.post('/register', passport.authenticate('register', { failureRedirect: '/
           res.redirect('/login')
       }
   )
+//github
 
 export default router;
