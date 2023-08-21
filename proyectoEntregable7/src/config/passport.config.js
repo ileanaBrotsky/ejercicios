@@ -25,21 +25,21 @@ const initializePassport = () => {
 
             console.log(profile)
             try {
-                const user = await UserModel.findOne({ email: profile._json.email })
+                let user = await UserModel.findOne({ email: profile._json.email })
                 if (user) {
                     console.log("el usuario existe" + email)
                     return done(null, user)
                 }
-                const newUser = {
+                let newUser = {
                     first_name: profile._json.name,
                     last_name: "",
                     email: profile._json.email,
-                    age: profile._json.age,
+                    age: 18,
                     password: '',
                     rol: "usuario"
                 }
-                const result = await UserModel.create(newUser)
-                return done(null, newUser)
+                let result = await UserModel.create(newUser)
+                return done(null, result)
             } catch (e) {
 
                 return done('Error de login con github ' + e)

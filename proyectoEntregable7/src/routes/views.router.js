@@ -50,7 +50,7 @@ router.get(
 
 router.get(
   "/githubcallback", 
-  passport.authenticate('github', { failureRedirect:'/'}),
+  passport.authenticate('github', { failureRedirect:'/login'}),
   async (req, res)=>{
 console.log("callback: ", req.user)
 req.session.user= req.user
