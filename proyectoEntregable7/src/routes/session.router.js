@@ -21,22 +21,6 @@ router.post('/register', passport.authenticate('register', { failureRedirect: '/
           res.redirect('/login')
       }
   )
-//github
-router.get(
-  "/login-github", 
-  passport.authenticate('github', {scope: ['user:email']}),
-  async (req, res)=>{}
-  )
 
-router.get(
-  "/githubcallback", 
-  passport.authenticate('github', { failureRedirect}),
-  async (req, res)=>{
-console.log("callback: ", req.user)
-req.session.user= req.user
-console.log(req.session)
-res.redirect("/products")
-  }
-)
 
 export default router;

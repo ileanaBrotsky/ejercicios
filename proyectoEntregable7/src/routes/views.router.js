@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ProductModel } from "../dao/models/product.model.js";
 import { CartModel } from "../dao/models/cart.model.js";
 import { MessageModel } from "../dao/models/message.model.js";
+import passport from "passport";
 
 const router = Router();
 //MIDLEWARES
@@ -39,6 +40,24 @@ router.get("/logout",(req, res)=>{
     else return res.json({status:"Logout ERROR", body:err})
   })
 })
+
+//github login
+router.get(
+  "/login-github", 
+  passport.authenticate('github', {scope: ['user:email']}),
+  async (req, res)=>{}
+  )
+
+router.get(
+  "/githubcallback", 
+  passport.authenticate('github', { failureRedirect:'/'}),
+  async (req, res)=>{
+console.log("callback: ", req.user)
+req.session.user= req.user
+console.log(" la sesion tiene", req.session)
+res.redirect("/products")
+  }
+)
 //====================================================================//
 //CARRITO 
 // Ver todos los carritos
