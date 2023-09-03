@@ -1,0 +1,33 @@
+
+   <div class="d-flex justify-content-between align-items-center p-4">
+     
+         <h1>Este es mi carrito- id: {{cart._id}}</h1>
+         <a type="button" class="btn btn-secondary " href="/deleteProducts_cart/{{cart._id}}">Quitar todos</a>
+   </div>
+
+     <div class="col-12 d-flex flex-wrap justify-content-center p-4">
+      {{#each cart.products}}
+            <div class="card m-2" style="width: 18rem;">
+             <img src={{this.product.thumbnail}}class="card-img-top" style="height:250px" alt="..."> 
+            <div class="card-body">
+               <h5 class="card-title">{{this.product.title}}</h5>
+               <p class="card-text">{{this.product.description}}</p>
+               <div class="text-success p-2">${{this.product.price}}</div>
+             
+              
+            </div>
+            <div class=" card-footer">
+
+               <div class="d-flex justify-content-between">
+                  <h5>Cantidad: {{this.quantity}}</h5>
+                 <a href="/carts/64cecc22a83f9e03b7f393e4/{{this._id}}" class="btn btn-danger"> Quitar </a>
+               </div>
+               
+            </div>
+            </div>
+       {{cart}}
+      {{/each}}
+      </div>
+       <div class="d-flex justify-content-between align-items-center p-4">
+      <h3>total a pagar: ${{totalAmount}}</h3> 
+    </div>

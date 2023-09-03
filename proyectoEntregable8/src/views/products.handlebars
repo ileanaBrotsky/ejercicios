@@ -1,0 +1,24 @@
+
+   <div class="d-flex justify-content-between align-items-center p-4">
+     <div>
+   <div class=" row ">
+      <div class="col  "> 
+         <h1>Bienvenid@ {{user.first_name}}! Tu rol es "{{user.rol}}"</h1>
+   </div>
+   <div class="col-12 d-flex flex-wrap justify-content-center p-4">
+      {{#each products}}
+            <div class="card m-2" style="width: 18rem;">
+            <img src={{this.thumbnail}}class="card-img-top" style="height:250px" alt="...">
+            <div class="card-body">
+               <h5 class="card-title">{{this.title}}</h5>
+               <p class="card-text">{{this.description}}</p>
+               <div class="text-success p-2">${{this.price}}</div>
+               <div class=" text-end">
+                  <a href="/api/carts/carts/64d010993021e5b79249df1f/{{this._id}}" class="btn btn-primary"><span class="h4">+</span> Agregar al carrito</a>
+               </div>
+              
+            </div>
+            </div>
+       
+      {{/each}}
+      </div>
