@@ -62,6 +62,6 @@ export const authToken = (req, res, next) => {
   })
 }
 export const extractCookie = req => {
-  return (req?.cookies) ? req.cookies['secretCookieForJWT'] : null
+  return (req?.cookies) ? req.cookies['secretCookie'] : null
 
 }

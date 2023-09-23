@@ -25,6 +25,7 @@ router.get("/login",  (req, res)=>{
         }
       res.render('login',{layout:'inauthLayout'})
           })
+          
 //register view
  router.get("/register",  (req, res)=>{   
   if(req.session?.user){
@@ -37,7 +38,7 @@ router.get("/login",  (req, res)=>{
 router.get("/logout",(req, res)=>{   
   req.session.destroy(err=>{
     if(!err)  res.redirect('/')
-    else return res.json({status:"Logout ERROR", body:err})
+    else return res.send({status:"Logout ERROR", body:err})
   })
 })
 

@@ -2,7 +2,7 @@ import express from "express";
 import __dirname from './utils.js'
 import handlebars from "express-handlebars"
 import { Server } from "socket.io";
-// import session from 'express-session'
+ import session from 'express-session'
 // import MongoStore from "connect-mongo"
 import mongoose from "mongoose"
 import { MessageModel } from "./dao/models/message.model.js";
@@ -34,21 +34,12 @@ let messages= [];
 //url DB
 const url="mongodb+srv://ileanabrotsky:siv6iKzPaIw9nxR8@cluster0.kfytoyf.mongodb.net/"
 //SESSION
-// app.use(session({
-//   store: MongoStore.create({
-//     mongoUrl:url,
-//     dbName: 'sessions',
-//     mongoOptions: {
-//        useNewUrlParser: true,
-//        useUnifiedTopology: true
-//     },
-//     ttl:100
-//   }),
-//     secret: 'secret',
-//   resave: false,
-//   saveUninitialized:false
-
-// }))
+ app.use(session({
+      secret: 'secret',
+      resave: false,
+      saveUninitialized:false
+ }))
+ app.use(passport.session())
 // Passport
 initializePassport()
 app.use(passport.initialize())
